@@ -1,0 +1,28 @@
+<div class="headline">
+  <span class="headline__title">Jobs offers</span>
+</div>
+
+<div class="jobs-container">
+  <div class="spinner-layer" *ngIf="loadingInProcess && !showError; else jobsContainerContent">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <ng-template #jobsContainerContent>
+    <div class="error" *ngIf="showError">
+      <span>Some error occured :(</span>
+    </div>
+
+    <ng-container *ngIf="!showError">
+      <div *ngFor="let jobItem of jobs" class="card">
+        <div class="card__header">
+          <div class="card__title">{{ jobItem.title }}</div>
+          <div class="card__posted-time">{{ jobItem.time_ago }}</div>
+        </div>
+
+        <div class="card__actions">
+          <a mat-raised-button [href]="jobItem.url">More</a>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>
